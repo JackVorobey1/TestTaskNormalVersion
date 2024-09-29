@@ -1,0 +1,9 @@
+### Testing GET request
+GET http://localhost:8080/post
+
+
+### Testing POST request
+POST http://localhost:8080/post
+Content-Type: application/x-www-form-urlencoded
+
+name=John&age=30

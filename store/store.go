@@ -9,6 +9,7 @@ type Store struct {
 	Adapter *pg.PostgresAdapter // Адаптер для работы с базой данных
 }
 
+// хранит экземпляр структуры Store
 var Default *Store
 
 func InitStore(cfg *Config) (*Store, error) {
