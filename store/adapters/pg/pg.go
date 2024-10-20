@@ -2,11 +2,14 @@ package pg
 
 import (
 	"TestTask/store/model"
+
 	"fmt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"log"
 )
+
+//ТУТ МЕТОДЫ СТОРА
 
 type PostgresAdapter struct {
 	DB *gorm.DB
@@ -32,21 +35,4 @@ func NewAdapter(cfg *Config) (*PostgresAdapter, error) {
 	return &PostgresAdapter{
 		DB: db,
 	}, nil
-}
-
-// Функция для создания новой записи в базе данных
-func (adapter *PostgresAdapter) CreateExample(name string, email string) error {
-	// Создаем объект модели ExampleModel
-	example := model.ExampleModel{
-		Name:  name,
-		Email: email,
-	}
-
-	// Добавляем запись в базу данных через адаптер (DB)
-	if err := adapter.DB.Create(&example).Error; err != nil {
-		return err
-	}
-
-	log.Println("Запись успешно создана:", example)
-	return nil
 }

@@ -5,6 +5,11 @@ import "gorm.io/gorm"
 type ExampleModel struct {
 	gorm.Model
 
-	Name  string `yaml:"name"`
-	Email string `yaml:"email"`
+	Name  string `json:"name"`
+	Email string `json:"email"`
+}
+
+// проверка на пустоту
+func (u *ExampleModel) IsEmpty() bool {
+	return u.ID == 0
 }

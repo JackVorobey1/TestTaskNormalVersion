@@ -2,11 +2,13 @@ package store
 
 import (
 	"TestTask/store/adapters/pg"
+	"TestTask/store/usersS"
 )
 
 // Store - структура регистра, содержащая подключение и адаптер
 type Store struct {
-	Adapter *pg.PostgresAdapter // Адаптер для работы с базой данных
+	Adapter *pg.PostgresAdapter
+	Users   *usersS.Storage
 }
 
 // хранит экземпляр структуры Store
@@ -18,10 +20,13 @@ func InitStore(cfg *Config) (*Store, error) {
 	if err != nil {
 		return nil, err
 	}
-
+	users := usersS.NewStore(adapter.DB)
+	if err != nil {
+		return nil, err
+	}
 	// Возвращаем Store, содержащий адаптер
 	return &Store{
 		Adapter: adapter,
+		Users:   users,
 	}, nil
-
 }
